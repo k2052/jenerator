@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="component" version="2.5.0" method="upgrade">
+  <name><%= @name =></name>
+  <author><%= config[:author] =></author>
+  <creationDate><%= config[:creation_date] =></creationDate>
+  <copyright><%= config[:copyright] =></copyright>
+  <license><%= config[:license] =></license>
+  <authorEmail><%= config[:author_email] =></authorEmail>
+  <authorUrl><%= config[:author_url] =></authorUrl>
+  <version><%= config[:version] =></version>
+  <description><%= config[:description] =></description>  
+  
+  <install> <!-- Runs on install -->
+    <sql>
+      <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+    </sql>
+  </install>
+  <uninstall> <!-- Runs on uninstall -->
+    <sql>
+      <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+    </sql>
+  </uninstall>
+  <update> <!-- Runs on update; New in 1.6 -->
+    <schemas>
+      <schemapath type="mysql">sql/updates/mysql</schemapath>
+    </schemas>
+  </update>
+ 
+  <files folder="site/components/<%= @element =>">
+    <filename><= @name =>.php</filename>
+  </files>  
+  
+  <administration> 
+    <files folder="administrator/components/<%= @element =>">
+      <filename><%= @name =>.php</filename>
+      <folder>sql</folder>
+    </files>
+  </administration>
+</install>
